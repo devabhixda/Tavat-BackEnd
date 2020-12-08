@@ -8,3 +8,12 @@ exports.addChatRoom = functions.https.onCall((data, context) => {
       chatRoom: data["chatRoom"]
   });
 });
+
+exports.addMessage = functions.https.onCall((data, context) => {
+  const chatMessage = admin.firestore().collection("chatRoom").doc(data["chatRoomId"]).collection("chats");
+  return chatMessage.add({
+    "sendBy": data["sendBy"],
+    "message": data["message"],
+    "time": data["time"]
+  });
+});
