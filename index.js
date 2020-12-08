@@ -24,3 +24,12 @@ exports.updated = functions.https.onCall((data, context) => {
     "updatedAt": data["updatedAt"]
   });
 });
+
+exports.checkIn = functions.https.onCall((data, context) => {
+  const location = admin.firestore().collection("users").doc(data["uid"]);
+  return location.update({
+    'location': data["location"],
+    'checkName': data["checkName"],
+    'virtual': data["virtual"]
+  });
+});
