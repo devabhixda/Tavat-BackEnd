@@ -17,3 +17,10 @@ exports.addMessage = functions.https.onCall((data, context) => {
     "time": data["time"]
   });
 });
+
+exports.updated = functions.https.onCall((data, context) => {
+  const chatMessage = admin.firestore().collection("chatRoom").doc(data["chatRoomId"]);
+  return chatMessage.update({
+    "updatedAt": data["updatedAt"]
+  });
+});
