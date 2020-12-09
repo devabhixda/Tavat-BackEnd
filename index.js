@@ -26,8 +26,15 @@ exports.updated = functions.https.onCall((data, context) => {
 });
 
 exports.checkIn = functions.https.onCall((data, context) => {
-  const location = admin.firestore().collection("users").doc(data["uid"]);
-  return location.update({
+  const location = admin.firestore().collection("users").doc(data["uid"]).collection("checkin");
+  location.add({
+    'location': data["location"],
+    'vincinity': data["vincinity"],
+    'date': data["date"],
+    "time": data["time"]
+  });
+  const loc = admin.firestore().collection("users").doc(data["uid"]);
+  return loc.update({
     'location': data["location"],
     'checkName': data["checkName"],
     'virtual': data["virtual"]
