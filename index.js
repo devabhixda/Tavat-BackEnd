@@ -32,7 +32,8 @@ exports.checkIn = functions.https.onCall((data, context) => {
     'location': data["location"],
     'vincinity': data["vincinity"],
     'date': data["date"],
-    "time": data["time"]
+    "time": data["time"],
+    'virtual': data["virtual"]
   });
   const loc = admin.firestore().collection("users").doc(data["uid"]);
   return loc.update({
