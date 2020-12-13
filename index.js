@@ -50,3 +50,15 @@ exports.updateProfile = functions.https.onCall((data, context) => {
     "interests": data["interests"]
   });
 });
+
+exports.createAccount = functions.https.onCall((data, context) => {
+  const profile = admin.firestore().collection("users").doc(data["uid"]);
+  return profile.set({
+    'email': data["email"],
+    'name': data["name"],
+    'dob': data["dob"],
+    'gender': data["gender"],
+    'interests': "Your interests here",
+    "about": "Something about you"
+  });
+});
