@@ -70,3 +70,12 @@ exports.addAnswer = functions.https.onCall((data, context) => {
     "answer": data["ans"]
   });
 });
+
+exports.checkOut = functions.https.onCall((data, context) => {
+  const loc = admin.firestore().collection("users").doc(data["uid"]);
+  return loc.update({
+    'location': "",
+    'checkName': "",
+    'virtual': ""
+  });
+});
