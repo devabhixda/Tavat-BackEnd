@@ -62,3 +62,11 @@ exports.createAccount = functions.https.onCall((data, context) => {
     "about": "Something about you"
   });
 });
+
+exports.addAnswer = functions.https.onCall((data, context) => {
+  const answer = admin.firestore().collection("users").doc(data["uid"]).collection("questions");
+  return answer.add({
+    "question": data["que"],
+    "answer": data["ans"]
+  });
+});
