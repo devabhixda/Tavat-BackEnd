@@ -5,7 +5,8 @@ admin.initializeApp(functions.config().firebase);
 exports.addChatRoom = functions.https.onCall((data, context) => {
   const ChatRoom = admin.firestore().collection("chatRoom").doc(data["chatRoomId"]);
   return ChatRoom.set({
-      chatRoom: data["chatRoom"]
+    "users": data["users"],
+    "chatRoomId" : data["chatRoomId"],
   });
 });
 
