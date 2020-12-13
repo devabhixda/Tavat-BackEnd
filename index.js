@@ -42,3 +42,11 @@ exports.checkIn = functions.https.onCall((data, context) => {
     'virtual': data["virtual"]
   });
 });
+
+exports.updateProfile = functions.https.onCall((data, context) => {
+  const profile = admin.firestore().collection("users").doc(data["uid"]);
+  return profile.update({
+    "about": data["about"],
+    "interests": data["interests"]
+  });
+});
