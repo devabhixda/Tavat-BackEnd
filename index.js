@@ -7,6 +7,7 @@ exports.addChatRoom = functions.https.onCall((data, context) => {
   return ChatRoom.set({
     "users": data["users"],
     "chatRoomId" : data["chatRoomId"],
+    "uid": data["uid"]
   });
 });
 
